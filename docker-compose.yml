@@ -1,0 +1,12 @@
+version: "3"
+
+services:
+
+  tensorflow:
+    image: tensorflow/tensorflow:1.15.2-py3-jupyter
+    volumes:
+      - "../tensorflow/images:/mnt/Storage/CloudStorage/Dropbox/Photo_Library/LMI Cluj 2019"
+    working_dir: /root/anonymizer/tensorflow
+    ports:
+      - "8000:8888"
+

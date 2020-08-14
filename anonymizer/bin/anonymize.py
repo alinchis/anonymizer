@@ -21,6 +21,8 @@ from anonymizer.anonymization import Anonymizer
 from anonymizer.detection import Detector, download_weights, get_weights_path
 from anonymizer.obfuscation import Obfuscator
 
+import os.path
+
 
 def parse_args():
     parser = argparse.ArgumentParser(
@@ -78,7 +80,9 @@ def parse_args():
 
 def main(input_path, image_output_path, weights_path, image_extensions, face_threshold, plate_threshold,
          write_json, obfuscation_parameters):
-    download_weights(download_directory=weights_path)
+    
+    # if !os.path.exists(weights_path):
+    # download_weights(download_directory=weights_path)
 
     kernel_size, sigma, box_kernel_size = obfuscation_parameters.split(',')
     obfuscator = Obfuscator(kernel_size=int(kernel_size), sigma=float(sigma), box_kernel_size=int(box_kernel_size))

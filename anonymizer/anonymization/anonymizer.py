@@ -5,6 +5,9 @@ import numpy as np
 from PIL import Image
 from tqdm import tqdm
 
+# Import os module
+import os
+
 
 def load_np_image(image_path):
     image = Image.open(image_path).convert('RGB')
@@ -63,9 +66,17 @@ class Anonymizer:
             output_image_path = Path(output_path) / relative_path
             output_detections_path = (Path(output_path) / relative_path).with_suffix('.json')
 
-            # Anonymize image
-            image = load_np_image(str(input_image_path))
-            anonymized_image, detections = self.anonymize_image(image=image, detection_thresholds=detection_thresholds)
-            save_np_image(image=anonymized_image, image_path=str(output_image_path))
-            if write_json:
-                save_detections(detections=detections, detections_path=str(output_detections_path))
+            if os.path.exists(output_image_path):
+                # print the message if path exists
+                print("Output File exists, skipping...")
+
+            else:
+                # Print the message if the file path does not exist
+                # print("Output File does not exist, processing...")
+
+                # Anonymize image
+                image = load_np_image(str(input_image_path))
+                anonymized_image, detections = self.anonymize_image(image=image, detection_thresholds=detection_thresholds)
+                save_np_image(image=anonymized_image, image_path=str(output_image_path))
+                if write_json:
+                    save_detections(detections=detections, detections_path=str(output_detections_path))
