@@ -66,13 +66,13 @@ class Anonymizer:
             output_image_path = Path(output_path) / relative_path
             output_detections_path = (Path(output_path) / relative_path).with_suffix('.json')
 
-            if os.path.exists(output_image_path):
+            if False: # if os.path.exists(output_image_path):
                 # print the message if path exists
                 print("Output File exists, skipping...")
 
             else:
                 # Print the message if the file path does not exist
-                # print("Output File does not exist, processing...")
+                # print(" >>> Output File does not exist, processing...")
 
                 # Anonymize image
                 image = load_np_image(str(input_image_path))
